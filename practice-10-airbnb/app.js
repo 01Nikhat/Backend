@@ -1,6 +1,7 @@
 
 const express = require('express');//external module
 const userRouter = require("./routes/userRouter");//local module
+const hostRouter = require("./routes/hostRouter");
 
 const app = express();
 
@@ -15,30 +16,11 @@ app.get((req,res,next) =>{
 app.use(express.urlencoded());
 
 app.use(userRouter);
+app.use("/host",hostRouter);
 
-app.get('/host/add-home',(req,res,next) =>{
-  res.send(
-  `<h1>Register Your home here</h1>
-  <form action="/host/add-home" method="POST">
-      <input type="text" name="houseName" placeholder="Enter Your Name of your house"/>
-      <input type="submit" />
-      
-  </form>`
-  ); 
-  
-});
-
-app.post('/host/add-home',(req,res,next) =>{
-  console.log(req.body);
-  
-  res.send(
-  `<h1>Register Successfully</h1>
-  <a href="/">Go to home page</a>`
-  ); 
-  
-});
-
-
+app.use((req,res,next) =>{
+  res.status(404).send('<h1>404 Your page is not found on airbnb</h1>');
+})
 //const server = http.createServer(app);
 
 // Start the server
