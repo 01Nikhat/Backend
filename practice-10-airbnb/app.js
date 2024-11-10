@@ -1,5 +1,6 @@
 
 const express = require('express');//external module
+const path = require('path');//core module
 const userRouter = require("./routes/userRouter");//local module
 const hostRouter = require("./routes/hostRouter");
 
@@ -19,7 +20,7 @@ app.use(userRouter);
 app.use("/host",hostRouter);
 
 app.use((req,res,next) =>{
-  res.status(404).send('<h1>404 Your page is not found on airbnb</h1>');
+  res.status(404).sendFile(path.join(__dirname,'views','404.html'));
 })
 //const server = http.createServer(app);
 
