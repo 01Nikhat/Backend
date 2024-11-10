@@ -3,6 +3,7 @@ const express = require('express');//external module
 const path = require('path');//core module
 const userRouter = require("./routes/userRouter");//local module
 const hostRouter = require("./routes/hostRouter");
+const rootDir = require("./utils/pathUtils");
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(userRouter);
 app.use("/host",hostRouter);
 
 app.use((req,res,next) =>{
-  res.status(404).sendFile(path.join(__dirname,'views','404.html'));
+  res.status(404).sendFile(path.join(rootDir,'views','404.html'));
 })
 //const server = http.createServer(app);
 
